@@ -1,0 +1,21 @@
+"Alexa, start Just Meditate"
+"Welcome to Just Meditate, your daily meditation tracker. Specify a meditation session duration or just say "begin"."
+"Begin"
+"You're on level 1 and your 3 minutes and 20 seconds session is about to begin. Get ready."
+- Notification sounds
+- 3 minute session runs
+- Notification sound
+"Great job, your session is complete."
+- Ending notification sound
+
+OR
+
+"Alexa, start Just Meditate"
+"Welcome to Just Meditate, your daily meditation tracker. Specify a meditation session duration or just say "begin"."
+"5 and a half minutes"
+"Your 5 and a half minute session is about to begin. Get ready."
+- Notification sounds
+- 5.5 minute session runs
+- Notification sound
+"Great job, your session is complete."
+- Ending notification sound
