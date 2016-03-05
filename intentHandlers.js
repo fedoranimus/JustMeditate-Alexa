@@ -27,10 +27,13 @@ var registerIntentHandlers = function(intentHandlers, skillContext) {
             var level = currentMeditation.data.level;
             var progress = currentMeditation.data.progress;
             var baseTime = 3000 * 60; //3 minutes
-            //var minuteInMillis = 60000;
-            var calculatedDuration = baseTime + Math.round(100000*(level*Math.log10(level))); //convert from milliseconds to something speakable
-            var speechDuration = calculatedDuration;
-            var speechText = 'Your meditation will last ' + speechDuration + '. Get comfortable and let\'s begin. 3. <break time=\"1.0s\" /> 2. <break time=\"1.0s\" /> 1. <break time=\"1.0s\" />'; //do a 3 seconds countdown?
+            var minuteInMillis = 60000;
+            var calculatedDuration = baseTime + Math.round(100000*(level*Math.log10(level)));
+            var minuteDuration = Math.floor(calculatedDuration / minuteInMillis);
+            var secondDuration = Math.floor(((calculatedDuration/minuteInMillis) - minuteDuration) / 1000);
+            var speechDuration = minuteDuration + "'" + secondDuration + "\"";
+            console.log("DynamicMeditationIntent: calculatedDuration: " + calculatedDuration + " speechDuration: " + speechDuration);
+            var speechText = 'Your meditation will last <say-as interpret-as="time">' + speechDuration + '</say-as>. Get comfortable and let\'s begin. 3. <break time=\"1.0s\" /> 2. <break time=\"1.0s\" /> 1. <break time=\"1.0s\" />'; //do a 3 seconds countdown?
             var speechOutput = {
                 speech: '<speak>' + speechText + '</speak>',
                 type: AlexaSkill.speechOutputType.SSML
