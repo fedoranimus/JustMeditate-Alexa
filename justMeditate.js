@@ -8,7 +8,7 @@ var skillContext = {};
 
 var JustMeditate = function() {
     AlexaSkill.call(this, APP_ID);
-    skillContext.needMoreHelp = true; //what does this do?
+    skillContext.needMoreHelp = true;
 }
 
 JustMeditate.prototype = Object.create(AlexaSkill.prototype);
