@@ -11,13 +11,24 @@ var registerEventHandlers = function(eventHandlers, skillContext) {
     };
     
     eventHandlers.onLaunch = function (launchRequest, session, response) {
+        console.log("JustMeditate onLaunch requestId: " + launchRequest.requestId + ", sessionId: " + session.sessionId);
+        
         //speak welcome message and ask user questions
         storage.loadMeditation(session, function (currentMeditation) {
-            var speechOutput = '',
-                reprompt;
+            var speechOutput = 'Welcome to Just Meditate. Say begin to track your progess or just specify a duration',
+                reprompt = textHelper.completeHelp;
             //add responses based on state
+            
+            response.ask(speechOutput, reprompt);
         });
     };
+    
+    eventHandlers.onSessionEnded = function(sessionEndedRequest, session) {
+      console.log("onSessionEnded requestId: " + sessionEndedRequest.requestId + ", sessionId: " + session.sessionId);  
+    };
+    
+    
+    
 };
 
 exports.register = registerEventHandlers;
