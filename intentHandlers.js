@@ -52,7 +52,7 @@ var registerIntentHandlers = function(intentHandlers, skillContext) {
                 } else {
                     speechOutputEnd = 'Great job. You\'re ' + (100 - currentMeditation.data.progress) + ' of the way from level ' + (currentMeditation.data.level+1) + '.';
                 }
-                response.tell(speechOutputEnd);
+                response.tell(speechOutputEnd); //should use tellWithCard()
             }, calculatedDuration);
         });
     };
