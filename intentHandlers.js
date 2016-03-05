@@ -64,6 +64,34 @@ var registerIntentHandlers = function(intentHandlers, skillContext) {
         //use the duration the user specified
     };
     
+    function convertISO8601DurationToMillis(duration) {
+        var iso8601DurationRegex = /(-)?P(?:([\.,\d]+)Y)?(?:([\.,\d]+)M)?(?:([\.,\d]+)W)?(?:([\.,\d]+)D)?T(?:([\.,\d]+)H)?(?:([\.,\d]+)M)?(?:([\.,\d]+)S)?/;
+        var durationInMillis = 0;
+        var matches = duration.match(iso8601DurationRegex);
+        duration = {
+            sign: matches[1] === undefined ? '+' : '-',
+            years: matches[2] === undefined ? 0 : matches[2],
+            months: matches[3] === undefined ? 0 : matches[3],
+            weeks: matches[4] === undefined ? 0 : matches[4],
+            days: matches[5] === undefined ? 0 : matches[5],
+            hours: matches[6] === undefined ? 0 : matches[6],
+            minutes: matches[7] === undefined ? 0 : matches[7],
+            seconds: matches[8] === undefined ? 0 : matches[8]
+        }
+        
+        var milliYears = duration.years * 31556952000;
+        var milliMonths = duration.months * 2629746000;
+        var milliWeeks = duration.weeks * 604800000;
+        var milliDays = duration.days * 86400000;
+        var milliHours = duration.hours * 3600000;
+        var milliMinutes = duration.minutes * 60000;
+        var milliSeconds = duration.seconds * 1000;
+        
+        durationInMillis = milliYears + milliMonths + milliWeeks + milliDays + milliHours + milliMinutes + milliSeconds;
+        
+        return durationInMillis;
+    }
+    
     intentHandlers['AMAZON.HelpIntent'] = function (intent, session, response) {
         //ask for help
     };
